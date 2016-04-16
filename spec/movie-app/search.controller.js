@@ -4,20 +4,15 @@ describe('Search Controller', function(){
 
   beforeEach(module('movieApp'));
 
-  beforeEach(inject(function(_$controller_, _$location_){
+  beforeEach(inject(function(_$controller_, _$location_, _$timeout_){
     $scope = {};
     $location = _$location_;
+    $timeout = _$timeout_;
 
-    var fn = function($scope){
-
-      $scope.search = function(){
-        if($scope.query){
-          $location.path('/results').search('q', $scope.query);
-        }
-      }
-    }
-
-    _$controller_('SearchController', { $scope: $scope, $location: $location });
+    _$controller_('SearchController', { 
+      $scope: $scope, 
+      $location: _$location_,
+      $timeout: _$timeout_ });
   }));
 
 
@@ -31,5 +26,27 @@ describe('Search Controller', function(){
     $scope.query = '';
     $scope.search();
     expect($location.url()).toBe('');
+  });
+  
+  it('should redirect after 1 second of keyboard inactivity', function(){
+    $scope.query = 'star wars';
+    $scope.keyup();
+    $timeout.flush();
+    expect($timeout.verifyNoPendingTasks).not.toThrow();
+    expect($location.url()).toBe('/results?q=star%20wars');
+  });
+  
+  it('should cancel timeout in keydown', function(){
+    $scope.query = 'star wars';
+    $scope.keyup();
+    $scope.keydown();
+    expect($timeout.verifyNoPendingTasks).not.toThrow();
+  });
+  
+  it('should cancel timeout on search', function(){
+    $scope.query = 'star wars';
+    $scope.keyup();
+    $scope.search();
+    expect($timeout.verifyNoPendingTasks).not.toThrow();
   });
 });
