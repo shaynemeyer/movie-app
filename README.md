@@ -1,6 +1,23 @@
 # Movie-App
 A TDD first approach to building an Angular 1.4.4 app using the [Open Movie Database API](http://omdbapi.com/).
 
+## Running the app
+You must have nodejs installed to run this app. If not, start at [nodejs.org](https://nodejs.org/en/).
+
+### Install modules
+``` 
+npm install
+```
+
+### Run the app
+```
+node index.js
+```
+
+### Run the tests
+``` 
+npm test
+```
 
 ## Visual Studio Code Setup
 For this project I am using Visual Studio Code
