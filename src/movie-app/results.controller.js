@@ -15,6 +15,5 @@ angular.module('movieApp')
             $scope.results[index].data = data;
             $scope.results[index].open = true;
           });
-        
       };
   });

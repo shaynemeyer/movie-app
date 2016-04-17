@@ -4,16 +4,21 @@ A TDD first approach to building an Angular 1.4.4 app using the [Open Movie Data
 
 ## Visual Studio Code Setup
 For this project I am using Visual Studio Code
-To add intellisense for Angular and Jasmine. First ensure that you have [TSD - TypeScript Definition Manager](http://definitelytyped.org/tsd/) installed.
+To add intellisense for Angular and Jasmine. First ensure that you have [typings](https://github.com/typings/typings) installed.
 
-More on setting up intellisense in Visual Studio Code can be found [in an excellent post by John Papa](http://johnpapa.net/intellisense-witha-visual-studio-code/).
+More on setting up intellisense in Visual Studio Code can be found [in an excellent post by Tony Sneed](https://blog.tonysneed.com/2016/02/27/visual-studio-code-typescript-part-2/).
 
 ### install globally
 ``` 
-npm install tsd -g
+npm install typings -g
+```
+
+### init typings
+```
+typings init
 ```
 
 ### add definitions
 ```
-tsd query -r -o -a install angular jquery jasmine
+typings install jasmine --save-dev --ambient
 ```
